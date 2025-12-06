@@ -1,63 +1,701 @@
 <!doctype html>
-<html lang="en" class="h-100">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Debitnor AS">
-    <title></title>    
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap core CSS -->
-<link href="./bootstrap.min.css" rel="stylesheet">
+  <title>Gjeldsofferalliansen.no – Uavhengig informasjon om gjeld, rettigheter og gjeldsordning</title>
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+  <meta name="description" content="Gjeldsofferalliansen.no er en uavhengig informasjonsside om gjeldsproblemer, rettigheter og gjeldsordning. Nettsiden er ikke tilknyttet organisasjonen Gjeldsoffer-Alliansen (GOA) gjeld.org. Få oversikt og lenker til profesjonell gjeldsrådgivning hos Debitnor." />
+  <link rel="canonical" href="https://gjeldsofferalliansen.no/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="gjeldsordning, gjeldsoffer, gjeldsproblemer, inkasso, gjeldsrådgivning, gjeldsofferalliansen, privatøkonomi" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gjeldsofferalliansen.no – Uavhengig informasjon om gjeld og gjeldsordning" />
+  <meta property="og:description" content="Informasjon om gjeldsproblemer, gjeldsordning og rettigheter for gjeldsofre. Nettsiden er ikke assosiert med organisasjonen Gjeldsoffer-Alliansen (GOA) gjeld.org. Lenker til profesjonell gjeldsrådgivning hos Debitnor." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gjeldsofferalliansen.no/" />
+  <meta property="og:image" content="https://gjeldsofferalliansen.no/og-image.jpg" />
+
+  <style>
+    :root {
+      --bg: #020617;        /* slate-950 */
+      --surface: #020617;
+      --card: #020617;
+      --text: #e5e7eb;      /* gray-200 */
+      --muted: #9ca3af;     /* gray-400 */
+      --primary: #38bdf8;   /* sky-400 */
+      --accent: #f97316;    /* orange-500 (for disclaimer) */
+      --link: #93c5fd;      /* blue-300 */
+      --shadow-soft: 0 16px 40px rgba(15,23,42,.75);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(1200px 600px at 0% 0%, rgba(56,189,248,.16), transparent 55%),
+        radial-gradient(1100px 600px at 100% 0%, rgba(249,115,22,.20), transparent 60%),
+        linear-gradient(180deg, #020617, #020617 30%, #020617 100%);
+      color: var(--text);
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(90deg, rgba(2,6,23,.98), rgba(2,6,23,.93));
+      border-bottom: 1px solid rgba(148,163,184,.35);
+    }
+
+    .topbar {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 25% 25%, #38bdf8, #0ea5e9 35%, transparent 60%),
+        radial-gradient(circle at 70% 75%, #f97316, #ea580c 45%, transparent 75%),
+        linear-gradient(135deg, #0f172a, #020617);
+      box-shadow: 0 12px 30px rgba(15,23,42,.85);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title span:first-child {
+      font-weight: 700;
+      letter-spacing: .03em;
+      font-size: 20px;
+    }
+
+    .brand-title span:last-child {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+    }
+    nav a {
+      color: #cbd5f5;
+      opacity: .9;
+    }
+    nav a:hover {
+      opacity: 1;
+    }
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(248,250,252,.3);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #e5e7eb;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 22px;
+      margin-top: 26px;
+      align-items: stretch;
+    }
+
+    .card {
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,.16), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(248,250,252,.06), transparent 60%),
+        rgba(15,23,42,.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,.45);
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-subtle {
+      background:
+        radial-gradient(circle at 100% 0, rgba(249,115,22,.18), transparent 55%),
+        rgba(15,23,42,.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,.35);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .disclaimer {
+      border: 1px solid rgba(248,113,113,.8);
+      background:
+        radial-gradient(circle at 0 0, rgba(248,113,113,.25), transparent 60%),
+        rgba(30,41,59,.98);
+      color: #fee2e2;
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 12px;
+    }
+
+    .disclaimer-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid #fecaca;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,.7);
+      background: rgba(8,47,73,.7);
+      color: #e0f2fe;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: clamp(26px, 3.2vw, 34px);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(20px, 2.6vw, 26px);
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0 0 10px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .hero-lede {
+      font-size: 15px;
+    }
+
+    .hero-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .hero-list li {
+      padding: 4px 0;
+      display: flex;
+      gap: 8px;
+    }
+    .hero-list li::before {
+      content: "•";
+      color: var(--primary);
+      margin-top: 1px;
+    }
+
+    .cta-row {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid rgba(148,163,184,.75);
+      background: rgba(15,23,42,.96);
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      border: none;
+      background: linear-gradient(120deg, #0ea5e9, #22c55e);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(34,197,94,.45);
+    }
+
+    .meta-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .grid-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 20px;
+      margin-top: 30px;
+      align-items: flex-start;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .two-col-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px 24px;
+      margin: 8px 0 4px;
+    }
+    .two-col-list div {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .check-list {
+      list-style: none;
+      margin: 6px 0 4px;
+      padding: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .check-list li {
+      padding: 3px 0;
+      display: flex;
+      gap: 8px;
+    }
+    .check-list li::before {
+      content: "✓";
+      color: #22c55e;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+
+    .pill-link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 4px;
+    }
+    .pill-link {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(148,163,184,.7);
+      font-size: 12px;
+      color: #e5e7eb;
+      background: rgba(15,23,42,.97);
+    }
+
+    .faq-list {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+    }
+
+    .faq-item {
+      border-top: 1px solid rgba(148,163,184,.45);
+      padding: 8px 0 10px;
+    }
+
+    .faq-item:first-child {
+      border-top: none;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 3px;
+    }
+
+    .faq-a {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      border-top: 1px solid rgba(148,163,184,.45);
+      margin-top: 28px;
+      padding-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 880px) {
+      .hero, .grid-main {
+        grid-template-columns: minmax(0, 1fr);
       }
+      header { position: static; }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+    @media (max-width: 600px) {
+      .two-col-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+
+  <!-- Strukturert data: WebSite + FAQPage med fokus på gjeldsordning -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Gjeldsofferalliansen.no",
+        "url": "https://gjeldsofferalliansen.no/",
+        "description": "Uavhengig informasjonsside om gjeldsproblemer, rettigheter og gjeldsordning. Ikke assosiert med organisasjonen Gjeldsoffer-Alliansen (GOA) gjeld.org.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Gjeldsofferalliansen.no – uavhengig informasjonsside"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Er Gjeldsofferalliansen.no det samme som organisasjonen Gjeldsoffer-Alliansen (GOA)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nei. Gjeldsofferalliansen.no er en uavhengig informasjonsside, og er ikke tilknyttet, godkjent, sponset eller på annen måte assosiert med organisasjonen Gjeldsoffer-Alliansen (GOA) som har nettstedet gjeld.org."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hva er en gjeldsordning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gjeldsordning er en lovregulert ordning for personer med alvorlige og varige betalingsproblemer. Namsfogden kan fastsette en betalingsplan over flere år, og etter perioden kan deler av eller all gjeld slettes. Ordningen krever god dokumentasjon og realistisk budsjett."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hvor kan jeg få profesjonell hjelp til gjeldsordning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Du kan få informasjon hos NAV og namsfogden. I tillegg kan uavhengige gjeldsrådgivere, som Debitnor (debitnor.no), bistå med kartlegging, budsjett og vurdering av om gjeldsordning er riktig løsning for deg."
+            }
+          }
+        ]
       }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-  </head>
-  <body class="d-flex h-100 text-center text-black bg-white">
-    
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0"></h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true"></div>
+        <div class="brand-title">
+          <span>Gjeldsofferalliansen.no</span>
+          <span>Uavhengig informasjon for personer med gjeldsproblemer</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#gjeldsordning">Gjeldsordning</a>
+        <a href="#rettigheter">Rettigheter</a>
+        <a href="#faq">FAQ</a>
+        <span class="pill">Ikke GOA / gjeld.org</span>
       </nav>
     </div>
   </header>
 
+  <div class="container">
+    <main>
+      <!-- Hero -->
+      <section class="hero" aria-label="Hovedinnhold">
+        <div class="card">
+          <div class="eyebrow">
+            Uavhengig informasjon om gjeld og gjeldsordning
+          </div>
+          <h1>Står du i en vanskelig gjeldssituasjon? Her får du oversikt – uten støy.</h1>
+          <p class="hero-lede">
+            Gjeldsofferalliansen.no er en <strong>uavhengig informasjonsside</strong> for personer som opplever seg som
+            «gjeldsofre»: mange krav, inkasso, lønnstrekk og lite oversikt. Her finner du rolig og strukturert informasjon
+            om rettigheter, mulige løsninger og hva <strong>gjeldsordning</strong> egentlig innebærer.
+          </p>
+          <ul class="hero-list">
+            <li>Forklaring av gjeldsordning, steg for steg, på et forståelig språk.</li>
+            <li>Oversikt over forskjellen mellom frivillige avtaler og formell gjeldsordning.</li>
+            <li>Lenker til offentlige ressurser – og til profesjonell gjeldsrådgivning hos <strong>Debitnor</strong>.</li>
+          </ul>
 
-  <main class="px-3">
-    <a href="https://debitnor.no/"> <img src="./DebitNor_logo.png" class="img-fluid" alt="debitnor logo"></a>
-    <h1 class="mt-5">Sliter du med gjeldsproblemer?</h1>
-    <p class="lead">Vi kan hjelpe deg. Ring Debitnor AS på 4006 1111 eller fyll ut vurderingsskjema her for gratis vurdering på telefon</p>
-    <p class="lead">
-      <a href="https://debitnor.no/vurderingsskjema/" class="btn btn-lg btn-primary fw-bold border-black bg-blue">Fyll ut vurderingssjema</a></p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://debitnor.no/" target="_blank" rel="noopener">
+              Få hjelp til gjeldsordning hos Debitnor
+            </a>
+            <a class="btn" href="#gjeldsordning">
+              Les mer om gjeldsordning trinn for trinn
+            </a>
+          </div>
 
-  </main>
+          <!-- Tydeleg disclaimer om GOA -->
+          <div class="disclaimer">
+            <div class="disclaimer-icon">!</div>
+            <div>
+              <strong>Viktig presisering:</strong><br />
+              Nettsiden <strong>Gjeldsofferalliansen.no</strong> er en uavhengig informasjonsside og er
+              <strong>ikke</strong> tilknyttet, godkjent, støttet eller på annen måte assosiert med organisasjonen
+              <strong>Gjeldsoffer-Alliansen (GOA)</strong>, som har nettstedet
+              <a href="https://gjeld.org/" target="_blank" rel="noopener nofollow">gjeld.org</a>.
+              Alle omtaler av «gjeldsoffer» her er generelle og ikke knyttet til GOA som organisasjon.
+            </div>
+          </div>
+        </div>
 
-  <footer class="mt-auto text-black">
-    <p>Copyright © 2022 <a href="https://debitnor.no" class="text-decoration-none">Debitnor AS</a> - Org nr. 992938862 MVA - All Rights Reserved</p>
-  </footer>
-</div>
+        <aside class="card-subtle" aria-label="Rådgivning og kontakt">
+          <h2>Få profesjonell vurdering av situasjonen din</h2>
+          <p>
+            Når økonomien har sklidd ut over tid, er det vanskelig å vite om <strong>gjeldsordning</strong> er riktig,
+            eller om det finnes andre, raskere løsninger. En erfaren gjeldsrådgiver kan hjelpe deg å se alle muligheter.
+          </p>
+          <ul class="check-list">
+            <li>Kartlegging av inntekter, utgifter, eiendeler og gjeld</li>
+            <li>Realistisk budsjett – hva har du igjen å leve av?</li>
+            <li>Vurdering av frivillige avtaler vs. formell gjeldsordning</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn" href="https://debitnor.no/kontakt/" target="_blank" rel="noopener">
+              Kontakt Debitnor for en uforpliktende vurdering
+            </a>
+          </div>
+          <p class="meta-note">
+            Debitnor er en uavhengig aktør innen gjeldsrådgivning. 
+            Rådgiverne kan hjelpe deg å vurdere om <a href="https://debitnor.no/" target="_blank" rel="noopener">gjeldsordning</a> er riktig for deg.
+          </p>
+        </aside>
+      </section>
 
+      <!-- Hovedinnhold -->
+      <section class="grid-main" aria-label="Detaljert informasjon">
+        <article>
+          <!-- Hva er gjeldsordning -->
+          <section id="gjeldsordning" class="section">
+            <h2>Hva er gjeldsordning – og hvorfor er det siste utvei?</h2>
+            <p>
+              En <strong>gjeldsordning</strong> er en lovregulert ordning for personer som har så alvorlige og varige
+              betalingsproblemer at vanlig nedbetaling ikke lenger er realistisk. Namsfogden kan da fastsette en plan
+              der du betaler etter evne i en begrenset periode – ofte 5 år – før resterende gjeld helt eller delvis slettes.
+            </p>
+            <div class="two-col-list">
+              <div>
+                <strong>Hovedtrekk i en gjeldsordning:</strong><br />
+                • Felles løsning for all usikret gjeld<br />
+                • Stramt, men lovbestemt levebudsjett<br />
+                • Betaling etter evne, ikke etter kreditorenes krav
+              </div>
+              <div>
+                <strong>Formålet med gjeldsordning:</strong><br />
+                • Stoppe den negative spiralen<br />
+                • Skape forutsigbarhet og ro<br />
+                • Gi deg mulighet til å starte på nytt etter perioden
+              </div>
+            </div>
+            <p>
+              Før du søker, bør du få en faglig vurdering. En rådgiver hos
+              <a href="https://debitnor.no/" target="_blank" rel="noopener">
+                Debitnor med erfaring fra gjeldsordning
+              </a>
+              kan gå gjennom saken din og se om dette faktisk er det beste sporet for deg.
+            </p>
+          </section>
 
-    
-  </body>
+          <!-- Rettigheter / hvem passer -->
+          <section id="rettigheter" class="section">
+            <h2>Rettigheter for deg som gjeldsoffer</h2>
+            <p>
+              Mange som lever med tung gjeld, vet ikke hvilke rettigheter de faktisk har. Kort fortalt har du krav på
+              å bli behandlet saklig og korrekt – også når du skylder penger.
+            </p>
+            <ul class="check-list">
+              <li>Du har rett til innsyn i krav, renter og gebyrer hos kreditor og inkassoselskap.</li>
+              <li>Du har rett til å klage på urimelige omkostninger og feil i saken.</li>
+              <li>Du har rett til å få vurdert en søknad om <strong>gjeldsordning</strong> dersom vilkårene kan være oppfylt.</li>
+              <li>Du har rett til veiledning fra det offentlige, og du kan i tillegg bruke private rådgivere.</li>
+            </ul>
+            <p>
+              Gjeldsofferalliansen.no gir kun generell informasjon. For konkret vurdering anbefaler vi å snakke med
+              fagpersoner, for eksempel en rådgiver hos
+              <a href="https://debitnor.no/" target="_blank" rel="noopener">Debitnor</a>.
+            </p>
+          </section>
+
+          <!-- Stegvis oversikt -->
+          <section class="section">
+            <h2>Veien videre: fra kaos til plan</h2>
+            <p>
+              Uansett om du ender i <strong>gjeldsordning</strong> eller en annen løsning, vil mange av stegene være de samme:
+            </p>
+            <ul class="check-list">
+              <li><strong>Samle alle tall:</strong> Inn med alle krav, kontoutskrifter og brev på samme sted.</li>
+              <li><strong>Lag et nøkternt budsjett:</strong> Hva trenger du faktisk til bolig, mat, strøm og nødvendige utgifter?</li>
+              <li><strong>Snakk med kreditorene:</strong> Mange vil heller ha en liten, stabil betaling enn ingen betaling.</li>
+              <li><strong>Vurder alternativer:</strong> Refinansiering, frivillig avtale eller formell gjeldsordning.</li>
+              <li><strong>Få støtte:</strong> Å stå i dette alene er tungt – ta kontakt med noen som kan feltet.</li>
+            </ul>
+            <p>
+              Her kan det være lurt å bruke en profesjonell tredjepart. 
+              <a href="https://debitnor.no/" target="_blank" rel="noopener">Debitnor</a> jobber daglig med personer som
+              vurderer <strong>gjeldsordning</strong> og lignende løsninger.
+            </p>
+          </section>
+        </article>
+
+        <!-- Sidepanel -->
+        <aside aria-label="Ekstra informasjon og FAQ">
+          <div class="card-subtle">
+            <h3>Hvem står bak denne siden?</h3>
+            <p>
+              <strong>Gjeldsofferalliansen.no</strong> er en uavhengig informasjonsside. Målet er å samle nøktern
+              og forståelig informasjon for personer som føler seg som «gjeldsofre».
+            </p>
+            <p>
+              Nettsiden er utviklet i samme miljø som gjeldsrådgivningsaktøren
+              <a href="https://debitnor.no/" target="_blank" rel="noopener">Debitnor</a>, som tilbyr profesjonell
+              rådgivning om blant annet <strong>gjeldsordning</strong> og forhandlinger med kreditorer.
+            </p>
+            <p style="color:#fecaca;">
+              Siden er <strong>ikke</strong> tilknyttet organisasjonen Gjeldsoffer-Alliansen (GOA) – se
+              <a href="https://gjeld.org/" target="_blank" rel="noopener nofollow">gjeld.org</a> for GOAs offisielle nettsted.
+            </p>
+          </div>
+
+          <div class="card-subtle">
+            <h3>Snarveier</h3>
+            <div class="pill-link-list">
+              <a class="pill-link" href="#gjeldsordning">Hva er gjeldsordning?</a>
+              <a class="pill-link" href="#rettigheter">Rettigheter som gjeldsrammet</a>
+              <a class="pill-link" href="#faq">FAQ om gjeldsordning</a>
+              <a class="pill-link" href="https://debitnor.no/" target="_blank" rel="noopener">
+                Debitnor – hjelp til gjeldsordning
+              </a>
+              <a class="pill-link" href="https://debitnor.no/kontakt/" target="_blank" rel="noopener">
+                Snakk med en rådgiver
+              </a>
+            </div>
+          </div>
+
+          <div id="faq" class="card-subtle">
+            <h3>FAQ – vanlige spørsmål</h3>
+            <ul class="faq-list">
+              <li class="faq-item">
+                <div class="faq-q">Er dette den «offisielle» Gjeldsoffer-Alliansen?</div>
+                <div class="faq-a">
+                  Nei. <strong>Gjeldsofferalliansen.no</strong> er en uavhengig informasjonsside og er
+                  <strong>ikke</strong> den samme som organisasjonen Gjeldsoffer-Alliansen (GOA). GOA har sitt eget
+                  nettsted på <a href="https://gjeld.org/" target="_blank" rel="noopener nofollow">gjeld.org</a>.
+                </div>
+              </li>
+              <li class="faq-item">
+                <div class="faq-q">Hvor får jeg konkret hjelp til gjeldsordning?</div>
+                <div class="faq-a">
+                  Du kan få veiledning hos NAV og hos namsfogden i kommunen din. I tillegg kan en privat aktør som
+                  <a href="https://debitnor.no/" target="_blank" rel="noopener">Debitnor</a> hjelpe deg med å kartlegge
+                  situasjonen og vurdere om <strong>gjeldsordning</strong> er aktuelt – eller om andre løsninger kan være bedre.
+                </div>
+              </li>
+              <li class="faq-item">
+                <div class="faq-q">Er gjeldsordning alltid den beste løsningen?</div>
+                <div class="faq-a">
+                  Nei. <strong>Gjeldsordning</strong> er ofte siste utvei når alt annet er forsøkt. Noen kan rydde opp
+                  gjennom strengere budsjett, frivillige avtaler eller refinansiering. Derfor er det viktig med en
+                  individuell vurdering før du søker.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        © <span id="year"></span> Gjeldsofferalliansen.no – Uavhengig informasjon om gjeldsproblemer, rettigheter og
+        <strong>gjeldsordning</strong>. Innholdet er generell informasjon og erstatter ikke individuell rådgivning.
+      </p>
+      <p style="color:#fecaca;">
+        Nettsiden er ikke tilknyttet, godkjent eller assosiert med organisasjonen Gjeldsoffer-Alliansen (GOA)
+        med nettstedet <a href="https://gjeld.org/" target="_blank" rel="noopener nofollow">gjeld.org</a>.
+      </p>
+      <p>
+        For personlig vurdering av situasjonen din anbefales det å kontakte
+        <a href="https://debitnor.no/" target="_blank" rel="noopener">debitnor.no</a>.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
